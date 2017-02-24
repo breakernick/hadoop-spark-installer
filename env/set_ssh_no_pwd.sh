@@ -38,10 +38,9 @@ type="rsa"
     fi
 
 sudo -u $user scp ~/.ssh/id_$type.pub $host:~/
-sudo -u $user ssh $host "cd; mkdir -p .ssh; cat id_${type}.pub >> .ssh/authorized_keys; rm id_$type.pub"
+sudo -u $user ssh $host "cd; mkdir -p .ssh; cat id_${type}.pub >> .ssh/authorized_keys; rm id_$type.pub; restorecon -R -v .ssh"
 
 echo "set ssh root to $host without password OK"
 
 } &
 wait
-
